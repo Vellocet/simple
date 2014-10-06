@@ -1,0 +1,3 @@
+vellocet_simple_homepage:
+    path:     /
+    defaults: { _controller: VellocetSimpleBundle:Default:index }

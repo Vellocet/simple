@@ -1,0 +1,4 @@
+services:
+    vellocet_simple.category_service:
+        class: Vellocet\SimpleBundle\Service\CategoryService
+        arguments: [@doctrine.orm.entity_manager, @validator]

@@ -1,0 +1,4 @@
+vellocet_simple:
+    resource: "@VellocetSimpleBundle/Resources/config/routing.yml"
+    prefix:   /
+
