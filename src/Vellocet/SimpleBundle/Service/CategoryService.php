@@ -24,7 +24,7 @@ class CategoryService
     /**
      * validator
      * Validator for input
-     * @var mixed
+     * @var Symfony\Component\Validator\ValidatorInterface
      */
     private $validator;
 
@@ -51,7 +51,7 @@ class CategoryService
      * Creates a category and saves to database
      * @param array $params
      */
-    public function createCategory($params)
+    public function createCategory(array $params)
     {
         // Validates parameters, throws ValidationException
         $this->validateParams($params);
@@ -65,6 +65,12 @@ class CategoryService
         return $category;
     }
 
+    /**
+     * getCategory
+     * Retrieves category from database
+     *
+     * @param int $id
+     */
     public function getCategory($id)
     {
         $category = $this->em->getRepository("VellocetSimpleBundle:Category")->find(1);
@@ -76,7 +82,14 @@ class CategoryService
         return $category;
     }
 
-    public function updateCategory($id, $params)
+    /**
+     * updateCategory
+     * Updates category in database
+     *
+     * @param int $id
+     * @param array $params
+     */
+    public function updateCategory($id, array $params)
     {
         $category = $this->em->getRepository("VellocetSimpleBundle:Category")->find(1);
         if ($category === null)
@@ -92,6 +105,12 @@ class CategoryService
         return $category;
     }
 
+    /**
+     * deleteCategory
+     * Deletes a category from database
+     *
+     * @param int $id
+     */
     public function deleteCategory($id)
     {
         $category = $this->em->getRepository("VellocetSimpleBundle:Category")->find(1);
@@ -104,7 +123,13 @@ class CategoryService
         $this->em->flush();
     }
 
-    private function validateParams($params) {
+    /**
+     * validateParams
+     * Validates parametes and throws exception on errors
+     *
+     * @param array $params
+     */
+    private function validateParams(array $params) {
         $constraints = new Constraints\Collection(array(
             'name' => array(
                 new Constraints\NotBlank(array(

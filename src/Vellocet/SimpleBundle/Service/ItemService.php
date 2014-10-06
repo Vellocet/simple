@@ -25,7 +25,7 @@ class ItemService
     /**
      * validator
      * Validator for input
-     * @var mixed
+     * @var Symfony\Component\Validator\ValidatorInterface
      */
     private $validator;
 
@@ -47,7 +47,13 @@ class ItemService
         $this->validator = $validator;
     }
 
-    public function createItem($params)
+    /**
+     * createItem
+     * Creats item and persists
+     *
+     * @param array $params
+     */
+    public function createItem(array $params)
     {
         $this->validateParams($params);
 
@@ -67,6 +73,12 @@ class ItemService
         return $item;
     }
 
+    /**
+     * getItem
+     * Retrieves item from database
+     *
+     * @param int $id
+     */
     public function getItem($id)
     {
         $item = $this->em->getRepository("VellocetSimpleBundle:Item")->find($id);
@@ -78,6 +90,13 @@ class ItemService
         return $item;
     }
 
+    /**
+     * updateItem
+     * Update item in the database
+     *
+     * @param int $id
+     * @param array $params
+     */
     public function updateItem($id, $params)
     {
         $item = $this->em->getRepository("VellocetSimpleBundle:Item")->find($id);
@@ -101,6 +120,12 @@ class ItemService
         return $item;
     }
 
+    /**
+     * deleteItem
+     * Deletes item from the database
+     *
+     * @param int $id
+     */
     public function deleteItem($id)
     {
         $item = $this->em->getRepository("VellocetSimpleBundle:Item")->find($id);
@@ -113,7 +138,13 @@ class ItemService
         $this->em->flush();
     }
 
-    private function validateParams($params)
+    /**
+     * validateParams
+     * Validate parameters and throws exception
+     *
+     * @param array $params
+     */
+    private function validateParams(array $params)
     {
         $constraints = new Constraints\Collection(array(
             'name' => array(
@@ -145,6 +176,5 @@ class ItemService
         {
             throw new ValidationException($errors);
         }
-
     }
 }
